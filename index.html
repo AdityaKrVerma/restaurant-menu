@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* CSS Reset and Basic Styling */
+    /* CSS Reset and Base Styling */
     * {
       margin: 0;
       padding: 0;
@@ -31,7 +31,6 @@
       align-items: center;
       justify-content: center;
     }
-    /* Container for logo and restaurant name */
     .header-container {
       display: flex;
       align-items: center;
@@ -54,13 +53,14 @@
       padding: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    /* Container for the rendered PDF pages */
-    #pdf-viewer {
+    .pdf-section {
       width: 100%;
+      height: 80vh; /* Occupies 80% of the viewport height */
     }
-    /* Each canvas (page) will have a little margin below */
-    .page {
-      margin-bottom: 20px;
+    .pdf-section object {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
     .fallback {
       text-align: center;
@@ -87,8 +87,7 @@
       font-size: 0.9em;
       margin-top: 20px;
     }
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
+    @media (max-width:600px) {
       .header-container h1 {
         font-size: 1.5em;
       }
@@ -106,9 +105,14 @@
     </div>
   </header>
   <div class="container">
-    <!-- PDF Viewer Container -->
-    <div id="pdf-viewer"></div>
-    <!-- Fallback download link -->
+    <!-- PDF Embedded Using the <object> Tag -->
+    <div class="pdf-section">
+      <object data="menu.pdf" type="application/pdf">
+        <!-- Fallback content if the browser cannot display PDFs -->
+        <p>Your device does not support inline PDFs.
+          Please <a href="menu.pdf" download>download the PDF</a> to view the menu.</p>
+      </object>
+    </div>
     <div class="fallback">
       <p>If you're having trouble viewing the menu, please <a href="menu.pdf" download>download the PDF</a>.</p>
     </div>
@@ -116,54 +120,5 @@
   <footer>
     &copy; 2025 Golmirch Restaurant. All Rights Reserved.
   </footer>
-  
-  <!-- Include PDF.js from the Mozilla CDN -->
-  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-  <script>
-    // URL of the PDF to render
-    const url = 'menu.pdf';
-
-    // Set the workerSrc property for PDF.js
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
-
-    // Fetch and render the PDF document
-    pdfjsLib.getDocument(url).promise.then(pdf => {
-      console.log('PDF loaded');
-
-      const pdfViewer = document.getElementById('pdf-viewer');
-
-      // Function to render a page of the PDF
-      function renderPage(pageNum) {
-        pdf.getPage(pageNum).then(page => {
-          const scale = 1.5; // Adjust scale for readability
-          const viewport = page.getViewport({ scale: scale });
-          const canvas = document.createElement('canvas');
-          canvas.classList.add('page');
-          const context = canvas.getContext('2d');
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-
-          // Append the canvas to the viewer container
-          pdfViewer.appendChild(canvas);
-
-          // Render the page into the canvas
-          const renderContext = {
-            canvasContext: context,
-            viewport: viewport
-          };
-          page.render(renderContext).promise.then(() => {
-            console.log(`Page ${pageNum} rendered`);
-          });
-        });
-      }
-
-      // Render all pages of the PDF
-      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-        renderPage(pageNum);
-      }
-    }).catch(error => {
-      console.error('Error loading PDF:', error);
-    });
-  </script>
 </body>
 </html>
