@@ -53,14 +53,12 @@
       padding: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    .pdf-section {
-      width: 100%;
-      height: 80vh; /* Occupies 80% of the viewport height */
-    }
-    .pdf-section object {
-      width: 100%;
-      height: 100%;
-      border: none;
+    /* PDF.js viewer styles */
+    #pdf-viewer canvas {
+      display: block;
+      margin: 0 auto 20px auto;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .fallback {
       text-align: center;
@@ -105,14 +103,9 @@
     </div>
   </header>
   <div class="container">
-    <!-- PDF Embedded Using the <object> Tag -->
-    <div class="pdf-section">
-      <object data="menu.pdf" type="application/pdf">
-        <!-- Fallback content if the browser cannot display PDFs -->
-        <p>Your device does not support inline PDFs.
-          Please <a href="menu.pdf" download>download the PDF</a> to view the menu.</p>
-      </object>
-    </div>
+    <!-- PDF.js Viewer Container -->
+    <div id="pdf-viewer"></div>
+    <!-- Fallback download link -->
     <div class="fallback">
       <p>If you're having trouble viewing the menu, please <a href="menu.pdf" download>download the PDF</a>.</p>
     </div>
@@ -120,5 +113,52 @@
   <footer>
     &copy; 2025 Golmirch Restaurant. All Rights Reserved.
   </footer>
+  
+  <!-- Include PDF.js library from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    // Set the workerSrc property using the CDN version of PDF.worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    // URL of the PDF file
+    var url = 'menu.pdf';
+    var pdfViewer = document.getElementById('pdf-viewer');
+
+    // Load the PDF document asynchronously
+    pdfjsLib.getDocument(url).promise.then(function(pdf) {
+      console.log('PDF loaded, pages: ' + pdf.numPages);
+      
+      // Function to render a page
+      function renderPage(pageNum) {
+        pdf.getPage(pageNum).then(function(page) {
+          var scale = 1.5; // Adjust scale for readability
+          var viewport = page.getViewport({ scale: scale });
+          var canvas = document.createElement('canvas');
+          var context = canvas.getContext('2d');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          
+          // Append the canvas for this page
+          pdfViewer.appendChild(canvas);
+          
+          // Render the page into the canvas context
+          var renderContext = {
+            canvasContext: context,
+            viewport: viewport
+          };
+          page.render(renderContext).promise.then(function() {
+            console.log('Page ' + pageNum + ' rendered');
+          });
+        });
+      }
+
+      // Render all pages of the PDF document
+      for (var pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        renderPage(pageNum);
+      }
+    }).catch(function(error) {
+      console.error('Error loading PDF: ', error);
+    });
+  </script>
 </body>
 </html>
