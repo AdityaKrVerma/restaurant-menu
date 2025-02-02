@@ -1,91 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Golmirch Restaurant - Menu</title>
   <!-- Google Fonts for modern typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* CSS Reset and Base Styling */
+    /* CSS Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    
     body {
       font-family: 'Montserrat', sans-serif;
       background: linear-gradient(135deg, #ffecd2, #fcb69f);
       color: #333;
       line-height: 1.6;
     }
+    
+    /* Header Styling */
     header {
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
       position: sticky;
       top: 0;
+      width: 100%;
       z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: center;
     }
+    
     .header-container {
       display: flex;
       align-items: center;
       gap: 10px;
     }
+    
     .header-container img {
       height: 60px;
       width: auto;
     }
+    
     .header-container h1 {
       color: #fff;
       font-size: 2em;
       letter-spacing: 2px;
     }
-    .container {
-      max-width: 1000px;
-      margin: 30px auto;
-      background: #fff;
+    
+    /* Gallery Container */
+    .menu-gallery {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    
+    /* Menu Images */
+    .menu-image {
+      width: 100%;
+      margin-bottom: 30px;
       border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.8s forwards;
     }
-    /* PDF.js viewer styles */
-    #pdf-viewer canvas {
-      display: block;
-      margin: 0 auto 20px auto;
-      border: 1px solid #ccc;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    .menu-image:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
-    .fallback {
-      text-align: center;
-      margin-top: 20px;
+    
+    /* Fade In Animation */
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    .fallback a {
-      display: inline-block;
-      background: #b22222;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-    .fallback a:hover {
-      background: #8b1a1a;
-    }
+    
+    /* Stagger animation delays for each image */
+    .menu-gallery img:nth-child(1) { animation-delay: 0.2s; }
+    .menu-gallery img:nth-child(2) { animation-delay: 0.4s; }
+    .menu-gallery img:nth-child(3) { animation-delay: 0.6s; }
+    .menu-gallery img:nth-child(4) { animation-delay: 0.8s; }
+    .menu-gallery img:nth-child(5) { animation-delay: 1s; }
+    .menu-gallery img:nth-child(6) { animation-delay: 1.2s; }
+    .menu-gallery img:nth-child(7) { animation-delay: 1.4s; }
+    .menu-gallery img:nth-child(8) { animation-delay: 1.6s; }
+    
+    /* Footer Styling */
     footer {
       text-align: center;
       padding: 15px;
       background: #fff;
       color: #777;
       font-size: 0.9em;
-      margin-top: 20px;
+      margin-top: 40px;
     }
-    @media (max-width:600px) {
+    
+    /* Responsive Adjustments */
+    @media (max-width: 600px) {
       .header-container h1 {
         font-size: 1.5em;
       }
@@ -96,69 +117,29 @@
   </style>
 </head>
 <body>
+  <!-- Header Section -->
   <header>
     <div class="header-container">
-      <img src="logo.png" alt="Golmirch Restaurant Logo">
+      <img src="logo.png" alt="Golmirch Restaurant Logo" />
       <h1>Golmirch Restaurant</h1>
     </div>
   </header>
-  <div class="container">
-    <!-- PDF.js Viewer Container -->
-    <div id="pdf-viewer"></div>
-    <!-- Fallback download link -->
-    <div class="fallback">
-      <p>If you're having trouble viewing the menu, please <a href="menu.pdf" download>download the PDF</a>.</p>
-    </div>
+  
+  <!-- Menu Gallery -->
+  <div class="menu-gallery">
+    <img src="menu1.jpg" alt="Menu Page 1" class="menu-image" />
+    <img src="menu2.jpg" alt="Menu Page 2" class="menu-image" />
+    <img src="menu3.jpg" alt="Menu Page 3" class="menu-image" />
+    <img src="menu4.jpg" alt="Menu Page 4" class="menu-image" />
+    <img src="menu5.jpg" alt="Menu Page 5" class="menu-image" />
+    <img src="menu6.jpg" alt="Menu Page 6" class="menu-image" />
+    <img src="menu7.jpg" alt="Menu Page 7" class="menu-image" />
+    <img src="menu8.jpg" alt="Menu Page 8" class="menu-image" />
   </div>
+  
+  <!-- Footer Section -->
   <footer>
     &copy; 2025 Golmirch Restaurant. All Rights Reserved.
   </footer>
-  
-  <!-- Include PDF.js library from CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-  <script>
-    // Set the workerSrc property using the CDN version of PDF.worker
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-
-    // URL of the PDF file
-    var url = 'menu.pdf';
-    var pdfViewer = document.getElementById('pdf-viewer');
-
-    // Load the PDF document asynchronously
-    pdfjsLib.getDocument(url).promise.then(function(pdf) {
-      console.log('PDF loaded, pages: ' + pdf.numPages);
-      
-      // Function to render a page
-      function renderPage(pageNum) {
-        pdf.getPage(pageNum).then(function(page) {
-          var scale = 1.5; // Adjust scale for readability
-          var viewport = page.getViewport({ scale: scale });
-          var canvas = document.createElement('canvas');
-          var context = canvas.getContext('2d');
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-          
-          // Append the canvas for this page
-          pdfViewer.appendChild(canvas);
-          
-          // Render the page into the canvas context
-          var renderContext = {
-            canvasContext: context,
-            viewport: viewport
-          };
-          page.render(renderContext).promise.then(function() {
-            console.log('Page ' + pageNum + ' rendered');
-          });
-        });
-      }
-
-      // Render all pages of the PDF document
-      for (var pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-        renderPage(pageNum);
-      }
-    }).catch(function(error) {
-      console.error('Error loading PDF: ', error);
-    });
-  </script>
 </body>
 </html>
