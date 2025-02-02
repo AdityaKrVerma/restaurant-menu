@@ -20,38 +20,33 @@
       line-height: 1.6;
     }
     
-    /* Header Styles */
+    /* Updated Header Styles */
     header {
+      background: #4C0407;
+      padding: 20px 0;
       position: sticky;
       top: 0;
       z-index: 1000;
-      padding: 10px 0;
-      background: rgba(76, 4, 7, 0.85); /* Using #4C0407 with translucency */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     .header-container {
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 10px 20px;
-      gap: 15px;
     }
-    .header-container img {
-      height: 60px;
-      width: auto;
+    .header-container .logo {
+      height: 80px;
+      margin-bottom: 10px;
     }
-    /* Translucent title background */
-    .title-box {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 10px 20px;
-      border-radius: 5px;
-    }
-    .title-box h1 {
+    .header-container h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5em;
       color: #fff;
       margin: 0;
+      text-align: center;
     }
     
     /* Gallery Styles */
@@ -160,10 +155,10 @@
       .header-container {
         flex-direction: column;
       }
-      .header-container img {
+      .header-container .logo {
         margin-bottom: 10px;
       }
-      .title-box h1 {
+      .header-container h1 {
         font-size: 1.8em;
       }
       .menu-gallery {
@@ -186,10 +181,8 @@
   <!-- Header -->
   <header>
     <div class="header-container">
-      <img src="logo.png" alt="Golmirch Restaurant Logo">
-      <div class="title-box">
-        <h1>Golmirch Restaurant</h1>
-      </div>
+      <img src="logo.png" alt="Golmirch Restaurant Logo" class="logo">
+      <h1>Golmirch Restaurant</h1>
     </div>
   </header>
   
