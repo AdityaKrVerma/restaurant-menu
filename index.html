@@ -20,7 +20,7 @@
       line-height: 1.6;
     }
 
-    /* Slim Translucent Header */
+    /* Enhanced Header */
     header {
       position: fixed;
       top: 0;
@@ -28,34 +28,46 @@
       width: 100%;
       background: rgba(76, 4, 7, 0.75); /* #4C0407 with translucency */
       backdrop-filter: blur(5px);
-      padding: 5px 0;
+      padding: 10px 20px;
       z-index: 1000;
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     .header-content {
       max-width: 1200px;
       margin: 0 auto;
-      text-align: center;
-      color: #fff;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 15px;
     }
+    /* Place the logo to the left of the title */
     .header-content img {
-      height: 50px; /* Reduced logo height */
-      margin-bottom: 5px;
+      height: 60px;
+      width: auto;
     }
     .header-content h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem; /* Reduced font size */
-      letter-spacing: 1px;
+      font-size: 2.5rem;
+      color: #fff;
       margin: 0;
     }
+    /* Adjust header for smaller screens */
+    @media (max-width: 600px) {
+      .header-content {
+        flex-direction: row;
+        justify-content: center;
+      }
+      .header-content img {
+        height: 50px;
+      }
+      .header-content h1 {
+        font-size: 1.8rem;
+      }
+    }
 
-    /* Main Content – Adjust top padding so header overlaps only slightly */
+    /* Main Content – Adjust top padding so the fixed header doesn't cover content */
     main {
-      padding-top: 70px; /* For mobile */
+      padding-top: 120px; /* More space for desktop */
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
@@ -86,7 +98,7 @@
       object-fit: contain;
       display: block;
     }
-    /* Staggered fade-in animation */
+    /* Staggered fade-in animation for each menu item */
     .menu-item:nth-child(1) { animation-delay: 0.2s; }
     .menu-item:nth-child(2) { animation-delay: 0.4s; }
     .menu-item:nth-child(3) { animation-delay: 0.6s; }
@@ -173,9 +185,6 @@
 
     /* Responsive Adjustments for Mobile */
     @media (max-width: 600px) {
-      .header-content h1 {
-        font-size: 1.8rem;
-      }
       .gallery-grid {
         grid-template-columns: 1fr;
       }
@@ -187,21 +196,13 @@
         margin: 20px auto;
       }
     }
-
-    /* Additional adjustments for Desktop/Laptops */
-    @media (min-width: 768px) {
-      main {
-        /* Increase top padding to ensure content isn't overlapped by the fixed header */
-        padding-top: 120px;
-      }
-    }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
     <div class="header-content">
-      <img src="logo.png" alt="Golmirch Restaurant Logo" />
+      <img src="logo.png" alt="Golmirch Restaurant Logo">
       <h1>Golmirch Restaurant</h1>
     </div>
   </header>
@@ -210,28 +211,28 @@
   <main>
     <div class="gallery-grid">
       <div class="menu-item">
-        <img src="menu1.jpg" alt="Menu Page 1" data-full="menu1.jpg" />
+        <img src="menu1.jpg" alt="Menu Page 1" data-full="menu1.jpg">
       </div>
       <div class="menu-item">
-        <img src="menu2.jpg" alt="Menu Page 2" data-full="menu2.jpg" />
+        <img src="menu2.jpg" alt="Menu Page 2" data-full="menu2.jpg">
       </div>
       <div class="menu-item">
-        <img src="menu3.jpg" alt="Menu Page 3" data-full="menu3.jpg" />
+        <img src="menu3.jpg" alt="Menu Page 3" data-full="menu3.jpg">
       </div>
       <div class="menu-item">
-        <img src="menu4.jpg" alt="Menu Page 4" data-full="menu4.jpg" />
+        <img src="menu4.jpg" alt="Menu Page 4" data-full="menu4.jpg">
       </div>
       <div class="menu-item">
-        <img src="menu5.jpg" alt="Menu Page 5" data-full="menu5.jpg" />
+        <img src="menu5.jpg" alt="Menu Page 5" data-full="menu5.jpg">
       </div>
       <div class="menu-item">
-        <img src="menu6.jpg" alt="Menu Page 6" data-full="menu6.jpg" />
+        <img src="menu6.jpg" alt="Menu Page 6" data-full="menu6.jpg">
       </div>
       <div class="menu-item">
-        <img src="menu7.jpg" alt="Menu Page 7" data-full="menu7.jpg" />
+        <img src="menu7.jpg" alt="Menu Page 7" data-full="menu7.jpg">
       </div>
       <div class="menu-item">
-        <img src="menu8.jpg" alt="Menu Page 8" data-full="menu8.jpg" />
+        <img src="menu8.jpg" alt="Menu Page 8" data-full="menu8.jpg">
       </div>
     </div>
 
@@ -244,7 +245,7 @@
   <!-- Lightbox Modal -->
   <div id="lightbox" class="lightbox">
     <a href="#" class="close">&times;</a>
-    <img src="" alt="Expanded Menu Image" id="lightbox-img" />
+    <img src="" alt="Expanded Menu Image" id="lightbox-img">
   </div>
 
   <!-- Footer -->
