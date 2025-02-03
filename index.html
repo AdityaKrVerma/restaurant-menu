@@ -28,7 +28,7 @@
       width: 100%;
       background: rgba(76, 4, 7, 0.75); /* #4C0407 with translucency */
       backdrop-filter: blur(5px);
-      padding: 5px 0; /* Reduced padding */
+      padding: 5px 0;
       z-index: 1000;
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
@@ -55,7 +55,7 @@
 
     /* Main Content – Adjust top padding so header overlaps only slightly */
     main {
-      padding-top: 70px; /* Reduced from 100px */
+      padding-top: 70px; /* For mobile */
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
@@ -171,7 +171,7 @@
       margin-top: 40px;
     }
 
-    /* Responsive Adjustments */
+    /* Responsive Adjustments for Mobile */
     @media (max-width: 600px) {
       .header-content h1 {
         font-size: 1.8rem;
@@ -185,6 +185,14 @@
       }
       .download-section {
         margin: 20px auto;
+      }
+    }
+
+    /* Additional adjustments for Desktop/Laptops */
+    @media (min-width: 768px) {
+      main {
+        /* Increase top padding to ensure content isn't overlapped by the fixed header */
+        padding-top: 120px;
       }
     }
   </style>
